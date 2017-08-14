@@ -85,7 +85,7 @@ app.get('/', function (req, res) {
 var ct=0;
 app.get('/counter',function(req,res){
     ct=ct+1;
-res.send(ct,toString());
+res.send(ct.toString());
 });
 
 app.get('/:pageName', function (req, res) {
