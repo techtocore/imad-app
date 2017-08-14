@@ -6,7 +6,7 @@ var app = express();
 app.use(morgan('combined'));
 
 var pages={
-     'pg-1':{
+     'page1':{
       title: "Page 1",
       heading: "Article 1",
       date: "Aug 13, 2017",
@@ -14,7 +14,7 @@ var pages={
       ` <center> <p> yedhukku?</p> </center>
       `
     },
-     'pg-2':{
+     'page2':{
       title: "Page 2",
       heading: "Article 2",
       date: "Aug 14, 2017",
@@ -22,7 +22,7 @@ var pages={
       ` <center> <p> ennamo oru text </p> </center>
       `
     },
-    'pg-3':{
+    'page3':{
       title: "Page 3",
       heading: "Article 3",
       date: "Aug 14, 2017",
@@ -73,6 +73,12 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
+app.get('/:pgName', function (req, res) {
+    //pgName == pg-1
+    var pageName = req.params.pageName;
+  res.send(createtemplate(pages[pageName]));
+});
+
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
 });
@@ -80,13 +86,6 @@ app.get('/ui/style.css', function (req, res) {
 app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
 });
-
-app.get('/:pgName', function (req, res) {
-    //pgName == pg-1
-    var pgName = req.params.pgName;
-  res.send(createtemplate(pages[pgName]));
-});
-
 
 
 
