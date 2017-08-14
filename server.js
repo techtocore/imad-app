@@ -5,6 +5,53 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
+
+var pg1={
+  title: "Page 1",
+  heading: "Article 1",
+  date: "Aug 14, 2017",
+  content:
+  ` <center> <p> yedhukku?</p> </center>
+  `
+};
+
+function createtemplate(data){
+
+var title=data.title;
+var date=data.date;
+var heading=data.heading;
+var content=data.content;
+
+var htmltemplate=`
+<html>
+    <head>
+        <title>
+            ${title} 
+        </title>
+        <meta name="viewport" content="width=device-width, intial-scale=1" />
+        <link href="/ui/style.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="container">
+            <div>
+                <a href="/">Home</a>
+            </div>
+        <hr/>
+        <h1>
+          ${heading}
+        </h1>
+        <dic> ${date} </dic>
+        <br/>
+        <div>  ${content} </div>
+        </div>
+        
+    </body>
+</html>
+`;
+return htmltemplate; 
+}
+
+
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
@@ -18,12 +65,17 @@ app.get('/ui/madi.png', function (req, res) {
 });
 
 app.get('/page1', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'page1.html'));
+  res.send(createtemplate(pg1));
 });
 
 app.get('/page2', function (req, res) {
-  res.send("page2 request received by webserver");
+  res.sendFile(path.join(__dirname, 'ui', 'page2.html'));
 });
+
+app.get('/page3', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'page3.html'));
+});
+
 
 // Do not change port, otherwise your app won't run on IMAD servers
 // Use 8080 only for local development if you already have apache running on 80
