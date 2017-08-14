@@ -83,7 +83,7 @@ app.get('/ui/madi.png', function (req, res) {
 
 app.get('/:pgName', function (req, res) {
     //pgName == pg-1
-    var pgName = req.parons.pgName;
+    var pgName = req.params.pgName;
   res.send(createtemplate(pages[pgName]));
 });
 
