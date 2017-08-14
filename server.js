@@ -5,16 +5,33 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
+var pages={
+     'pg-1':{
+      title: "Page 1",
+      heading: "Article 1",
+      date: "Aug 13, 2017",
+      content:
+      ` <center> <p> yedhukku?</p> </center>
+      `
+    },
+     'pg-2':{
+      title: "Page 2",
+      heading: "Article 2",
+      date: "Aug 14, 2017",
+      content:
+      ` <center> <p> ennamo oru text </p> </center>
+      `
+    },
+    'pg-3':{
+      title: "Page 3",
+      heading: "Article 3",
+      date: "Aug 14, 2017",
+      content:
+      ` <center> <p> mudiyala </p> </center>
+      `
+    }
 
-var pg1={
-  title: "Page 1",
-  heading: "Article 1",
-  date: "Aug 14, 2017",
-  content:
-  ` <center> <p> yedhukku?</p> </center>
-  `
 };
-
 function createtemplate(data){
 
 var title=data.title;
@@ -64,17 +81,13 @@ app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
 });
 
-app.get('/page1', function (req, res) {
-  res.send(createtemplate(pg1));
+app.get('/:pgName', function (req, res) {
+    //pgName == pg-1
+    var pgName = req.parons.pgName;
+  res.send(createtemplate(pages[pgName]));
 });
 
-app.get('/page2', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'page2.html'));
-});
 
-app.get('/page3', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'page3.html'));
-});
 
 
 // Do not change port, otherwise your app won't run on IMAD servers
