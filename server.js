@@ -6,12 +6,21 @@ var app = express();
 app.use(morgan('combined'));
 
 var pages={
-     'page1':{
+     'page-1':{
       title: "Page 1",
       heading: "Article 1",
-      date: "Aug 13, 2017",
+      date: "Aug 14, 2017",
       content:
-      ` <center> <p> yedhukku?</p> </center>
+      ` <center> <p> yedhukku? yaaru da nee komali??</p> </center>
+      `
+    }
+    ,
+    'page1':{
+      title: "Page 1",
+      heading: "Article 1",
+      date: "Aug 14, 2017",
+      content:
+      ` <center> <p> yedhukku? </p> </center>
       `
     },
      'page2':{
@@ -73,7 +82,7 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
-app.get('/:pgName', function (req, res) {
+app.get('/:pageName', function (req, res) {
     //pgName == pg-1
     var pageName = req.params.pageName;
   res.send(createtemplate(pages[pageName]));
